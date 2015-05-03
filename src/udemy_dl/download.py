@@ -21,11 +21,13 @@ def download(link, filename):
 
 
 def curl_dl(link, filename):
-    command = ['curl', '-C', '-', link, '-o', filename,'--insecure']
+    command = ['curl', '-C', '-', link, '-o', filename]
 
     cert_path = requests.certs.where()
     if cert_path:
         command.extend(['--cacert', cert_path])
+    else:
+        command.extend(['--insecure'])
     subprocess.call(command)
 
 
